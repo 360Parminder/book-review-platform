@@ -18,7 +18,7 @@ export default function Layout({ children, user, onLogout }) {
     >
       <Header user={user} onLogout={onLogout} />
       <main style={{ flex: 1, width: "100vw", margin: 0, padding: 0 }}>{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
