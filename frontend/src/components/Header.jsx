@@ -53,7 +53,18 @@ export default function Header({ user, onLogout }) {
             >
               Home
             </Link>
+           
             <Link
+              to="/explore"
+              className={`text-base font-medium py-1 px-2 rounded transition-colors duration-150 ${
+                location.pathname === "/explore"
+                  ? "text-blue-400 bg-gray-800"
+                  : "text-gray-300 hover:text-blue-400 hover:bg-gray-800"
+              }`}
+            >
+              Explore Books
+            </Link>
+             <Link
               to="/books/new"
               className={`text-base font-medium py-1 px-2 rounded transition-colors duration-150 ${
                 location.pathname === "/books/new"

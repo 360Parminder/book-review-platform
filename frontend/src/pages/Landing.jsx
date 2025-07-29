@@ -302,7 +302,7 @@ export default function Landing() {
             Sign up now to start sharing your reviews, get personalized recommendations, and connect with fellow book lovers.
           </p>
           <Link
-            to="/register"
+            to={isAuthenticated ? "/explore" : "/register"}
             className="inline-flex items-center bg-gray-100 text-indigo-700 hover:bg-white px-6 py-3 font-medium rounded-lg shadow-md transition-all"
           >
             Get Started
