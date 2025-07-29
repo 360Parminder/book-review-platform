@@ -1,12 +1,74 @@
-# React + Vite
+```markdown
+# ShelfWise Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React frontend application for ShelfWise — a Book Review platform.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup
 
-## Expanding the ESLint configuration
+1. Ensure you have Node.js installed.
+2. From the `/frontend` directory, install dependencies:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+npm install
+```
+
+3. Create a `.env` file at the root of this folder with:
+
+```
+REACT_APP_API_BASE=http://localhost:8007/api/v1
+```
+
+(Change this URL if your backend runs elsewhere.)
+
+---
+
+## Available Scripts
+
+- `npm start`  
+  Runs the app in development mode at [http://localhost:5173](http://localhost:5173).
+
+- `npm run build`  
+  Builds the app for production to the `build` folder.
+
+- `npm test`  
+  Launches the test runner.
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/        # Reusable UI components (BookList, BookForm, ReviewForm...)
+├── context/           # React Context for state management
+├── pages/             # Route-level components (Landing, Home, BookPage)
+├── config/            # Config (Api Config, External API)
+├── App.js             # Main app component with routing
+└── index.js           # App entry point
+
+```
+
+---
+
+## Notes
+
+- Uses React Router for navigation.
+- Axios handles API calls to backend.
+- Material UI components for modern styling.
+- React Toastify for in-app notifications.
+- State management central via React Context.
+
+---
+
+## Environment Variables
+
+- `REACT_APP_API_BASE` - base url for backend API endpoints.
+
+---
+
+## Contact
+
+For questions or suggestions, open an issue or contact the maintainer.
+```

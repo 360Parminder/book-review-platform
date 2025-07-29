@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
   TextField,
   Button,
@@ -21,7 +20,6 @@ export default function BookForm() {
     publishedYear: '',
     genre: '',
   });
-
   const [loading, setLoading] = useState(false);
 
   // Load existing book data if editing
@@ -88,18 +86,52 @@ export default function BookForm() {
         toast.success('Book created');
       }
       navigate('/');
-    } catch {
-      toast.error('Failed to save book');
+    } catch(error) {
+      toast.error(error.response?.data?.message || 'Failed to save book');
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading && id) return <CircularProgress />;
+  if (loading && id)
+    return (
+      <Box className="flex justify-center py-20 bg-gray-900 min-h-screen">
+        <CircularProgress color="inherit" size={48} thickness={5} />
+      </Box>
+    );
+
+  const inputSx = {
+    backgroundColor: '#1f2937', // bg-gray-800
+    borderRadius: 2,
+    input: {
+      color: '#f9fafb', // gray-50
+      '&::placeholder': { color: '#9ca3af' }, // gray-400
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#374151', // border-gray-700
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#4f46e5', // indigo-600
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#4f46e5',
+      borderWidth: 2,
+    },
+    '& .MuiInputLabel-root': {
+      color: '#fff', // gray-400
+    },
+  };
 
   return (
-    <Box component="form" p={2} onSubmit={handleSubmit} maxWidth={600} mx="auto">
-      <Typography variant="h5" mb={2}>
+    <Box
+      component="form"
+      p={2}
+      onSubmit={handleSubmit}
+      maxWidth={600}
+      mx="auto"
+      sx={{ backgroundColor: '#111827', borderRadius: 3, boxShadow: '0 4px 12px rgba(0,0,0,0.7)' }}
+    >
+      <Typography variant="h5" mb={2} sx={{ color: '#a5b4fc', fontWeight: 'bold' /* indigo-300 */ }}>
         {id ? 'Edit Book' : 'Add New Book'}
       </Typography>
 
@@ -111,6 +143,7 @@ export default function BookForm() {
         required
         fullWidth
         margin="normal"
+        sx={inputSx}
       />
       <TextField
         label="Author"
@@ -120,6 +153,7 @@ export default function BookForm() {
         required
         fullWidth
         margin="normal"
+        sx={inputSx}
       />
       <TextField
         label="Published Year"
@@ -130,6 +164,7 @@ export default function BookForm() {
         fullWidth
         margin="normal"
         type="number"
+        sx={inputSx}
       />
       <TextField
         label="Genre"
@@ -138,15 +173,39 @@ export default function BookForm() {
         onChange={handleChange}
         fullWidth
         margin="normal"
+        sx={inputSx}
+        InputLabelProps={{
+          style: { color: '#fff' }, // gray-400
+        }}
       />
 
-      <Box mt={3}>
-        <Button type="submit" variant="contained" disabled={loading}>
+      <Box mt={3} display="flex" gap={2}>
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={loading}
+          sx={{
+            bgcolor: '#4f46e5',
+            '&:hover': { bgcolor: '#4338ca' },
+            fontWeight: 'bold',
+            textTransform: 'none',
+          }}
+        >
           {loading ? 'Saving…' : id ? 'Update Book' : 'Create Book'}
         </Button>
         <Button
           variant="outlined"
-          sx={{ ml: 2 }}
+          sx={{
+            ml: 2,
+            borderColor: '#4f46e5',
+            color: '#4f46e5',
+            '&:hover': {
+              bgcolor: 'rgba(79, 70, 229, 0.1)',
+              borderColor: '#4338ca',
+            },
+            fontWeight: 'bold',
+            textTransform: 'none',
+          }}
           onClick={() => navigate(-1)}
           disabled={loading}
         >

@@ -7,10 +7,8 @@ export default function Header({ user, onLogout }) {
 
   useEffect(() => {
     function handleScroll() {
-        setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 50);
     }
-
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -18,20 +16,16 @@ export default function Header({ user, onLogout }) {
   return (
     <header
       className={`
-       ${scrolled ? "bg-white" : "bg-transparent"}
-       ${scrolled?" sticky top-4 z-30 ":"sticky top-0 z-30"}
+        ${scrolled ? "bg-gray-900 bg-opacity-90 border-gray-700 shadow-lg" : "bg-transparent border-transparent shadow-md"}
+        ${scrolled ? "sticky top-4 z-30" : "sticky top-0 z-30"}
         rounded-xl
-        bg-white/60
         backdrop-blur-md
-        border border-slate-200
-        shadow-[0_8px_32px_0_rgba(31,38,135,0.1)]
+        border
         transition-all duration-300
-        w-full
-        ${scrolled ? "scale-105 shadow-2xl border-blue-300" : "scale-100 shadow-md"}
+        ${scrolled ? "scale-105" : "scale-100"}
       `}
       style={{
         WebkitBackdropFilter: "blur(16px)",
-        // to give separation from edges when popped
         marginLeft: scrolled ? "1rem" : "0",
         marginRight: scrolled ? "1rem" : "0",
         marginTop: scrolled ? "0.75rem" : "0",
@@ -43,7 +37,7 @@ export default function Header({ user, onLogout }) {
         <div className="flex items-center gap-2 md:gap-6">
           <Link
             to="/"
-            className="text-2xl font-black tracking-tighter text-indigo-700 hover:text-indigo-800 transition-colors drop-shadow-sm"
+            className="text-2xl font-black tracking-tighter text-indigo-400 hover:text-indigo-500 transition-colors drop-shadow-sm"
             style={{ letterSpacing: "0.04em" }}
           >
             ShelfWise
@@ -53,8 +47,8 @@ export default function Header({ user, onLogout }) {
               to="/"
               className={`text-base font-medium py-1 px-2 rounded transition-colors duration-150 ${
                 location.pathname === "/"
-                  ? "text-blue-600 bg-blue-50"
-                  : "text-gray-800 hover:text-blue-600 hover:bg-blue-50"
+                  ? "text-blue-400 bg-gray-800"
+                  : "text-gray-300 hover:text-blue-400 hover:bg-gray-800"
               }`}
             >
               Home
@@ -63,8 +57,8 @@ export default function Header({ user, onLogout }) {
               to="/books/new"
               className={`text-base font-medium py-1 px-2 rounded transition-colors duration-150 ${
                 location.pathname === "/books/new"
-                  ? "text-blue-600 bg-blue-50"
-                  : "text-gray-800 hover:text-blue-600 hover:bg-blue-50"
+                  ? "text-blue-400 bg-gray-800"
+                  : "text-gray-300 hover:text-blue-400 hover:bg-gray-800"
               }`}
             >
               Add Book
@@ -80,25 +74,25 @@ export default function Header({ user, onLogout }) {
                 to="/login"
                 className={`px-4 py-1 rounded font-semibold border border-transparent transition-all duration-150 ${
                   location.pathname === "/login"
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-gray-800 hover:text-blue-600 hover:bg-blue-50"
+                    ? "text-blue-400 bg-gray-800"
+                    : "text-gray-300 hover:text-blue-400 hover:bg-gray-800"
                 }`}
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="px-4 py-1 rounded font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all"
+                className="px-4 py-1 rounded font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-all"
               >
                 Register
               </Link>
             </>
           ) : (
             <>
-              <span className="mr-1 font-medium text-gray-700 hidden md:inline">{user.username}</span>
+              <span className="mr-1 font-medium text-gray-300 hidden md:inline">{user.username}</span>
               <button
                 onClick={onLogout}
-                className="px-4 py-1 rounded border border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition-all"
+                className="px-4 py-1 rounded border border-blue-600 text-blue-400 font-semibold hover:bg-gray-800 transition-all"
               >
                 Logout
               </button>

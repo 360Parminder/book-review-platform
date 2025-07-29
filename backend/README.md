@@ -1,24 +1,93 @@
-# Node.js, Express and MongoDB Project Structure 
-This is a basic project structure to help you to start building your own RESTful web APIs (for Android, IOS, or JavaScript framworks) using Express framework and MongoDB with a good structure practices based on clean MVC Architecture.
 
+```markdown
+# ShelfWise Backend
 
-# Features
-- Fundamental of Express: routing, middleware, sending response and more
-- Fundamental of Mongoose: Data models, data validation and middleware
-- RESTful API including pagination,sorting and limiting fields
-- CRUD operations with MongoDB
-- Security: encyption, sanitization and more
-- Authentication with JWT : login and signup
-- Authorization (User roles and permissions)
-- Error handling
-- Enviroment Varaibles
-- handling error outside Express
-- Catching Uncaught Exception
+Node.js + Express REST API server for ShelfWise with MongoDB database.
 
-# Project Structure
-- server.js : Responsible for connecting the MongoDB and starting the server.
-- app.js : Configure everything that has to do with Express application. 
-- config.env: for Enviroment Varaiables
-- routes -> userRoutes.js: The goal of the route is to guide the request to the correct handler function which will be in one of the controllers
-- controllers -> userController.js: Handle the application request, interact with models and send back the response to the client 
-- models -> userModel.js: (Business logic) related to business rules, how the business works and business needs ( Creating new user in the database, checking if the user password is correct, validating user input data)
+---
+
+## Setup
+
+1. Ensure Node.js and MongoDB are installed.
+2. From the `/backend` directory, install dependencies:
+
+```
+npm install
+```
+
+3. Setup your environment variables:
+
+Create `.env` with contents similar to:
+
+```
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/shelfwise
+```
+
+Adjust `MONGODB_URI` to your MongoDB connection string.
+
+---
+
+## Available Scripts
+
+- `npm start`  
+  Runs the server once.
+
+- `npm run dev`  
+  Runs the server with `nodemon` for auto-restarting on changes (development mode).
+
+---
+
+## API Endpoints
+
+Base URL: `/api`
+
+### Books
+
+- `GET /api/books` - List all books with optional query filters (`?genre=&author=`)
+- `POST /api/books` - Create new book
+- `GET /api/books/:id` - Get single book with reviews
+- `PUT /api/books/:id` - Update a book
+- `DELETE /api/books/:id` - Delete a book (also deletes related reviews)
+
+### Reviews
+
+- `POST /api/books/:id/reviews` - Add a review for a book
+- `PUT /api/reviews/:id` - Update a review
+- `DELETE /api/reviews/:id` - Delete a review
+
+---
+
+## Project Structure
+
+```
+src/
+├── models/          # Mongoose schemas (Book.js, Review.js)
+├── routes/          # Express route handlers
+├── services/        # Business logic and DB queries
+├── app.js           # Express app setup and middleware
+├── db.js            # MongoDB connection setup
+└── index.js         # Server start file
+```
+
+---
+
+## Notes
+
+- Uses Mongoose for data modeling.
+- Error handling and validation done per route.
+- CORS enabled for frontend requests.
+- Environment variables managed with `dotenv`.
+
+---
+
+## Contact
+
+For backend issues, file tickets or reach out via the project channels.
+
+---
+
+*Developed as part of ShelfWise — Book Review Platform.*
+```
+
+If you want me to generate `.env.example` files or package.json scripts as well, just ask!

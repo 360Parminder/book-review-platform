@@ -4,11 +4,21 @@ const AppError = require('../utils/appError');
 exports.addReview = async (req, res, next) => {
     try {
         const bookId = req.params.id;
-        const userId = req.user.id; // From auth middleware
+        console.log(`Adding review for book ID: ${bookId}`);
+        
+        const existingReview = await Review.findOne({
+            bookId: bookId,
+            user: req.user.id // Ensure user can only add one review per book
+        });
+
+        if (existingReview) {
+            return next(new AppError( 400, 'fail', 'You have already reviewed this book'), req, res, next);
+        }
 
         const review = await Review.create({
-            book: bookId,
-            user: userId,
+            user: req.user.id, // Assuming user ID is available in req.user
+            bookId: bookId,
+            reviewerName: req.user.name, // Assuming user name is available
             rating: req.body.rating,
             comment: req.body.comment
         });
@@ -42,7 +52,7 @@ exports.updateReview = async (req, res, next) => {
         );
 
         if (!review) {
-            return next(new AppError('No review found or you are not authorized', 404));
+            return next(new AppError(404, 'fail', 'No review found or you are not authorized'), req, res, next);
         }
 
         res.status(200).json({
@@ -60,11 +70,11 @@ exports.deleteReview = async (req, res, next) => {
     try {
         const review = await Review.findOneAndDelete({
             _id: req.params.id,
-            user: req.user.id // Ensure user owns the review
+            user: req.user.id   // Ensure user owns the review
         });
 
         if (!review) {
-            return next(new AppError('No review found or you are not authorized', 404));
+            return next(new AppError(404, 'fail', 'No review found or you are not authorized'), req, res, next);
         }
 
         res.status(204).json({

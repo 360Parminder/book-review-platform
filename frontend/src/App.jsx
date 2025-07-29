@@ -1,17 +1,14 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./layout/Layout";
 import Landing from "./pages/Landing";
 import Explore from "./pages/Home";
-import BookPage from "./pages/BookPage";
 import BookForm from "./components/BookForm";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import apiClient from "./config/apiClient";
-import { useState } from "react";
 import { useAuth } from "./context/AuthContext";
+import BookDetail from "./pages/BookDetail";
 
 export default function App() {
   const {isAuthenticated,user,
@@ -29,7 +26,7 @@ export default function App() {
           <Route path="books">
             <Route path="new" element={<BookForm />} />
             <Route path="edit/:id" element={<BookForm />} />
-            <Route path=":id" element={<BookPage />} />
+            <Route path=":id" element={<BookDetail />} />
           </Route>
         </Route> 
 

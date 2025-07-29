@@ -1,4 +1,5 @@
 const Book = require('../models/bookModel');
+const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 
 exports.getAllBooks = async (req, res, next) => {
@@ -20,7 +21,8 @@ exports.getAllBooks = async (req, res, next) => {
 exports.getBookById = async (req, res, next) => {
     try {
         const book = await Book.findById(req.params.id);
-        
+        const reviews = await Review.find({ bookId: req.params.id });
+      
         if (!book) {
             return next(new AppError('No book found with that ID', 404));
         }
@@ -28,7 +30,8 @@ exports.getBookById = async (req, res, next) => {
         res.status(200).json({
             status: 'success',
             data: {
-                book
+                book,
+                reviews
             }
         });
     } catch (error) {

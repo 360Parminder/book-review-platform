@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from '../utils/auth'; // Adjust the import path as necessary
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8007/api/v1',
+    baseURL: process.env.REACT_APP_API_BASE || 'http://localhost:8007/api/v1',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

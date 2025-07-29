@@ -9,9 +9,9 @@ router.use(authController.protect);
 router.post('/books/:id/reviews', addReview);
 
 // Update a review
-router.put('/reviews/:id', updateReview);
+router.put('/:id', updateReview);
 
 // Delete a review
-router.delete('/reviews/:id', deleteReview);
+router.delete('/:id', deleteReview);
 
 module.exports = router;
