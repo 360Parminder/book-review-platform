@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "./context/AuthContext";
 import BookDetail from "./pages/BookDetail";
+import ScrollToTop from "./utils/ScrollToTop";
 
 export default function App() {
   const {isAuthenticated,user,
@@ -18,6 +19,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollToTop />
       <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         <Route path="/" element={<Layout user={user} onLogout={logout} /> }>
