@@ -13,7 +13,7 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     // Replace below with real auth logic
     if (form.email && form.password) {
-      onLogin({ username: form.email.split("@")[0] });
+      onLogin(form);
       navigate("/");
     }
   };

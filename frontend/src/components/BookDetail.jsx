@@ -12,9 +12,7 @@ import {
 import ReviewList from './ReviewList';
 import ReviewForm from './ReviewForm';
 import { toast } from 'react-toastify';
-
-const API_BASE = 'http://localhost:5000/api';
-
+import apiClient from '../config/apiClient';
 export default function BookDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,10 +25,10 @@ export default function BookDetail() {
     try {
       setLoadingBook(true);
       setError(null);
-      const res = await axios.get(`${API_BASE}/books/${id}`);
-      setBook(res.data);
+      const res = await apiClient.get(`/books/${id}`);
+      setBook(res.data.data.book);
     } catch {
-      setError('Failed to load book');
+      toast.error('Failed to load book details');
     } finally {
       setLoadingBook(false);
     }
@@ -43,7 +41,7 @@ export default function BookDetail() {
   const handleDeleteBook = async () => {
     if (!window.confirm('Delete this book? This action cannot be undone.')) return;
     try {
-      await axios.delete(`${API_BASE}/books/${id}`);
+      await apiClient.delete(`/books/${id}`);
       toast.success('Book deleted');
       navigate('/');
     } catch {

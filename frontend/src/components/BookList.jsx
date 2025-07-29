@@ -10,6 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -44,6 +45,10 @@ export default function BookList() {
     setFilters({ author: "", genre: "" });
     if (fetchBooks) fetchBooks({});
   };
+  // Fetch books on initial render
+  useEffect(() => {
+    if (fetchBooks) fetchBooks();
+  }, []);
 
   return (
     <Box className="p-4 max-w-7xl mx-auto">

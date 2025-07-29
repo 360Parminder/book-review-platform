@@ -9,8 +9,7 @@ import {
 } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-const API_BASE ='http://localhost:5000/api';
+import apiClient from '../config/apiClient';
 
 export default function BookForm() {
   const { id } = useParams(); // id=null for new, else edit
@@ -29,15 +28,13 @@ export default function BookForm() {
   useEffect(() => {
     if (id) {
       setLoading(true);
-      axios
-        .get(`${API_BASE}/books/${id}`)
+      apiClient.get(`/books/${id}`)
         .then((res) => {
-          const { title, author, publishedYear, genre } = res.data;
           setFormData({
-            title,
-            author,
-            publishedYear: publishedYear.toString(),
-            genre: genre || '',
+            title: res.data.data.book.title,
+            author: res.data.data.book.author,
+            publishedYear: res.data.data.book.publishedYear.toString(),
+            genre: res.data.data.book.genre || '',
           });
         })
         .catch(() => {
@@ -84,10 +81,10 @@ export default function BookForm() {
 
     try {
       if (id) {
-        await axios.put(`${API_BASE}/books/${id}`, payload);
+        await apiClient.put(`/books/${id}`, payload);
         toast.success('Book updated');
       } else {
-        await axios.post(`${API_BASE}/books`, payload);
+        await apiClient.post(`/books`, payload);
         toast.success('Book created');
       }
       navigate('/');

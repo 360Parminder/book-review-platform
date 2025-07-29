@@ -19,14 +19,14 @@ export default function Header({ user, onLogout }) {
     <header
       className={`
        ${scrolled ? "bg-white" : "bg-transparent"}
-       ${scrolled?" sticky top-4 z-30":"sticky top-0 z-30"}
+       ${scrolled?" sticky top-4 z-30 ":"sticky top-0 z-30"}
         rounded-xl
         bg-white/60
         backdrop-blur-md
         border border-slate-200
         shadow-[0_8px_32px_0_rgba(31,38,135,0.1)]
         transition-all duration-300
-        w-[90vw] md:w-[80vw] lg:w-[70vw]
+        w-full
         ${scrolled ? "scale-105 shadow-2xl border-blue-300" : "scale-100 shadow-md"}
       `}
       style={{

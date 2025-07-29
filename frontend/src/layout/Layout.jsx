@@ -1,24 +1,18 @@
-// src/components/Layout.js
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default function Layout({ children, user, onLogout }) {
+const Layout = ({ user, onLogout }) => {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        width: "100vw",
-        margin: 0,
-        padding: 0,
-        alignItems: "center",
-      }}
-    >
+    <div className="bg-gray-200">
       <Header user={user} onLogout={onLogout} />
-      <main style={{ flex: 1, width: "100vw", margin: 0, padding: 0 }}>{children}</main>
-      {/* <Footer /> */}
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
-}
+};
+
+export default Layout;
