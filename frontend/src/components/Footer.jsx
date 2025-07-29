@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Link as MuiLink } from "@mui/material";
 import { motion } from "framer-motion";
-import { FaFacebookF, FaTwitter, FaInstagram, FaGithub, FaBookOpen } from "react-icons/fa";
+import {  FaTwitter, FaInstagram, FaGithub, FaBookOpen,FaLinkedinIn } from "react-icons/fa";
 import { RiContactsBookLine } from "react-icons/ri";
 import { IoMdMail } from "react-icons/io";
 import { BsPhone } from "react-icons/bs";
@@ -21,10 +21,10 @@ const fadeIn = {
 };
 
 const socialLinks = [
-  { name: "Facebook", Icon: FaFacebookF, url: "https://facebook.com/bookreviewplatform" },
-  { name: "Twitter", Icon: FaTwitter, url: "https://twitter.com/bookreviewplat" },
-  { name: "Instagram", Icon: FaInstagram, url: "https://instagram.com/bookreviewplat" },
-  { name: "Github", Icon: FaGithub, url: "https://github.com/bookreviewplatform" }
+  { name: "LinkedIn", Icon: FaLinkedinIn, url: "https://www.linkedin.com/in/360parminder/" },
+  { name: "Twitter", Icon: FaTwitter, url: "https://x.com/360parminder" },
+  { name: "Instagram", Icon: FaInstagram, url: "https://www.instagram.com/360_parminder/" },
+  { name: "Github", Icon: FaGithub, url: "https://github.com/360parminder" }
 ];
 
 const quickLinks = [
@@ -63,7 +63,7 @@ export default function Footer() {
                 className="font-bold text-indigo-400 text-xl"
                 component="h3"
               >
-                BookVerse
+                ShelfWise
               </Typography>
             </div>
             <Typography variant="body2" className="text-gray-300 leading-relaxed">
@@ -165,13 +165,13 @@ export default function Footer() {
               >
                 <IoMdMail className="text-gray-400 mt-1 mr-2 flex-shrink-0" />
                 <a 
-                  href="mailto:support@bookverse.com" 
+                  href="mailto:360.parminder@gmail.com" 
                   className="text-gray-300 hover:text-indigo-400 transition-colors"
                 >
-                  support@bookverse.com
+                  360.parminder@gmail.com
                 </a>
               </motion.div>
-              <motion.div
+              {/* <motion.div
                 custom={0.6}
                 initial="hidden"
                 whileInView="visible"
@@ -183,7 +183,7 @@ export default function Footer() {
                 <span className="text-gray-300">
                   +1 (555) 123-4567
                 </span>
-              </motion.div>
+              </motion.div> */}
             </div>
           </motion.div>
 
