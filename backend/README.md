@@ -20,7 +20,7 @@ npm install
 Create `.env` with contents similar to:
 
 ```
-PORT=5000
+PORT=8007
 MONGODB_URI=mongodb://localhost:27017/shelfwise
 ```
 
