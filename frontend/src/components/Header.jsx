@@ -46,7 +46,7 @@ export default function Header({ user, onLogout }) {
             className="text-2xl font-black tracking-tighter text-indigo-700 hover:text-indigo-800 transition-colors drop-shadow-sm"
             style={{ letterSpacing: "0.04em" }}
           >
-            Book<span className="text-blue-500">Review</span>
+            ShelfWise
           </Link>
           <div className="hidden md:flex gap-2 md:gap-4 ml-4">
             <Link

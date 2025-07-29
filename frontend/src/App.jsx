@@ -11,32 +11,19 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import apiClient from "./config/apiClient";
 import { useState } from "react";
+import { useAuth } from "./context/AuthContext";
 
 export default function App() {
-  const [user, setUser] = useState(null);
-
-  const handleLogin = async (userData) => {
-    try {
-      const response = await apiClient.post('/users/login', {
-        email: userData.email,
-        password: userData.password,
-      });
-      console.log("Login response:", response.data.token);
-      
-      localStorage.setItem('token', response.data.token);
-      setUser(response.data.data.user);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  }
-  
-  const handleLogout = () => setUser(null);
+  const {isAuthenticated,user,
+    loading,
+    login,
+    logout,} = useAuth();
 
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
-        <Route path="/" element={<Layout user={user} onLogout={handleLogout} /> }>
+        <Route path="/" element={<Layout user={user} onLogout={logout} /> }>
           <Route index element={<Landing />} />
           <Route path="explore" element={<Explore />} />
           <Route path="books">
@@ -45,10 +32,10 @@ export default function App() {
             <Route path=":id" element={<BookPage />} />
           </Route>
         </Route> 
-        
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/register" element={<Register onLogin={handleLogin} />} />
-        
+
+        <Route path="/login" element={<Login onLogin={login} />} />
+        <Route path="/register" element={<Register onLogin={login} />} />
+
         <Route path="*" element={
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">404</h1>
