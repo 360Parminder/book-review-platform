@@ -17,7 +17,7 @@ const app = express();
 // Allow Cross-Origin requests
 app.use(cors(
     {
-        origin: ['http://localhost:5173','https://book-review-platform-x0ai.onrender.com'], // Adjust this to your frontend URL in production
+        origin: ['http://localhost:5173','https://book-review-platform-x0ai.onrender.com','https://shelfwise.parminder.info'], // Adjust this to your frontend URL in production
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true,
     }
