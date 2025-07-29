@@ -19,26 +19,46 @@ const itemVariants = {
 export default function BookList() {
   const { books, loadingBooks, error, fetchBooks } = useContext(AppContext);
   const [filters, setFilters] = useState({ author: "", genre: "" });
+  const [filteredBooks, setFilteredBooks] = useState([]);
+
+  // Update filteredBooks whenever books or filters change
+  useEffect(() => {
+    let filtered = books;
+
+    if (filters.author.trim()) {
+      const authorFilter = filters.author.trim().toLowerCase();
+      filtered = filtered.filter((book) =>
+        book.author.toLowerCase().includes(authorFilter)
+      );
+    }
+
+    if (filters.genre.trim()) {
+      const genreFilter = filters.genre.trim().toLowerCase();
+      filtered = filtered.filter((book) =>
+        book.genre && book.genre.toLowerCase().includes(genreFilter)
+      );
+    }
+    setFilteredBooks(filtered);
+  }, [books, filters]);
+
+  // Initial fetch
+  useEffect(() => {
+    if (fetchBooks) fetchBooks();
+  }, []);
 
   const handleInputChange = (e) => {
     setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const applyFilter = () => {
-    const filterObj = {};
-    if (filters.author.trim()) filterObj.author = filters.author.trim();
-    if (filters.genre.trim()) filterObj.genre = filters.genre.trim();
-    if (fetchBooks) fetchBooks(filterObj);
+    // No need to call fetchBooks here; filtering on frontend only
+    // Optionally, you can clear filter or any extra logic
   };
 
   const clearFilter = () => {
     setFilters({ author: "", genre: "" });
-    if (fetchBooks) fetchBooks({});
+    // filteredBooks will update automatically via useEffect
   };
-
-  useEffect(() => {
-    if (fetchBooks) fetchBooks();
-  }, []);
 
   return (
     <div className=" bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-6">
@@ -65,14 +85,14 @@ export default function BookList() {
             onChange={handleInputChange}
             className="min-w-[180px] px-4 py-2 rounded-lg bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           />
-          <motion.button
+          {/* <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            onClick={applyFilter}
+            onClick={applyFilter} // No action needed for frontend filter, but kept for UX
             className="min-w-[120px] bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition"
           >
             Apply
-          </motion.button>
+          </motion.button> */}
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
@@ -83,8 +103,6 @@ export default function BookList() {
           </motion.button>
           <Link
             to="/books/new"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
             className="ml-auto min-w-[140px] bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-lg px-4 py-2 transition flex items-center justify-center"
           >
             Add New Book
@@ -117,7 +135,7 @@ export default function BookList() {
           </div>
         ) : error ? (
           <p className="text-red-500 text-center text-lg font-semibold">{error}</p>
-        ) : books.length === 0 ? (
+        ) : filteredBooks.length === 0 ? (
           <p className="text-gray-400 text-center text-lg font-medium">No books found.</p>
         ) : (
           <motion.div
@@ -126,9 +144,9 @@ export default function BookList() {
             animate="visible"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {books.map((book) => (
+            {filteredBooks.map((book) => (
               <motion.div
-                key={book._id || book.id}
+                key={book._id?.$oid || book.id}
                 variants={itemVariants}
                 className="bg-gray-800 rounded-3xl shadow-xl p-6 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300"
               >
@@ -150,13 +168,13 @@ export default function BookList() {
                 </div>
                 <div className="mt-6 flex gap-4">
                   <Link
-                    to={`/books/${book._id || book.id}`}
+                    to={`/books/${book._id?.$oid || book.id}`}
                     className="flex-1 border border-indigo-500 text-indigo-400 rounded-lg py-2 text-center font-semibold transition hover:bg-indigo-600 hover:text-white"
                   >
                     View Details
                   </Link>
                   <Link
-                    to={`/books/edit/${book._id || book.id}`}
+                    to={`/books/edit/${book._id?.$oid || book.id}`}
                     className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg py-2 text-center font-semibold transition"
                   >
                     Edit

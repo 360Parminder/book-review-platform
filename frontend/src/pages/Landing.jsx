@@ -352,25 +352,25 @@ const categories = [
 
 const featuredBooks = [
   {
-    cover: "https://covers.openlibrary.org/b/id/1535616-L.jpg",
+    cover: "https://i0.wp.com/www.printmag.com/wp-content/uploads/2017/01/2a34d8_d1ccb8ff11be423b910af767d26917b8mv2.jpg?resize=459,640&quality=89&ssl=1",
     title: "1984",
     author: "George Orwell",
     rating: 4.8
   },
   {
-    cover: "https://covers.openlibrary.org/b/id/8228691-L.jpg",
+    cover: "https://i0.wp.com/www.nationalbook.org/wp-content/uploads/2015/08/To-Kill-a-Mockingbird-by-harper-lee-book-cover-e1553130216100.jpg?w=502&ssl=1",
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
     rating: 4.7
   },
   {
-    cover: "https://covers.openlibrary.org/b/id/8106326-L.jpg",
+    cover: "https://www.jarir.com/cdn-cgi/image/fit=contain,width=380,height=380,quality=100,metadata=none/https://ak-asset.jarir.com/akeneo-prod/asset/m1images/5/1/517619.jpg",
     title: "Atomic Habits",
     author: "James Clear",
     rating: 4.6
   },
   {
-    cover: "https://covers.openlibrary.org/b/id/9802982-L.jpg",
+    cover: "https://www.ynharari.com/wp-content/uploads/2023/01/Sapiens-UK-website-cover.png",
     title: "Sapiens",
     author: "Yuval Noah Harari",
     rating: 4.5
