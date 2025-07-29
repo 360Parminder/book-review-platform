@@ -1,9 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import apiClient from '../config/apiClient';
 
 export const AppContext = createContext();
-
-const API_BASE =  'http://localhost:8007/api/v1';
 
 export function AppProvider({ children }) {
   const [books, setBooks] = useState([]);
@@ -16,8 +15,8 @@ export function AppProvider({ children }) {
       setLoadingBooks(true);
       setError(null);
       const params = new URLSearchParams(filters).toString();
-      const url = params ? `${API_BASE}/books?${params}` : `${API_BASE}/books`;
-      const res = await axios.get(url);
+      const url = params ? `/books?${params}` : `/books`;
+      const res = await apiClient.get(url);
       console.log('Fetched books:', res.data);
 
       setBooks(res.data.data.books);
